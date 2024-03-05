@@ -37,7 +37,7 @@ int maxLCR(int arr[], int l, int m,int h){
     }
 
     return maximum(left_sum+right_sum-arr[m],left_sum,right_sum);
-}
+}    
 
 int maxSumSubArray(int arr[], int l, int h)
 {
@@ -57,7 +57,7 @@ int maxSumSubArray(int arr[], int l, int h)
 
 
 int main() { 
-    int arr[] = { -2, 3, 4, 5, 7 }; 
+    int arr[] = {-2, 3, 4, -1, -2, 1, 5, -3}; 
     int n = sizeof(arr) / sizeof(arr[0]); 
     int max_sum = maxSumSubArray(arr, 0, n - 1); 
     cout << "Maximum contiguous sum is " << max_sum; 

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Recursive approach
 int matrixChainMultiplication(int arr[], int i, int j){
     if(i==j)
     {

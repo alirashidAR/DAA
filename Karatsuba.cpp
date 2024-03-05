@@ -17,7 +17,7 @@ long karatsuba(long X,long Y){
     size = (size/2)+ (size%2);
     long multiplier = pow(10,size);
     long a = X/multiplier;
-    long b = X -(b*multiplier);
+    long b = X -(a*multiplier);
     long c = Y/multiplier;
     long d = Y -(c*multiplier);
     long U = karatsuba(a,c);
