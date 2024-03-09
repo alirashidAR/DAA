@@ -1,5 +1,4 @@
 #include<iostream>
-#include<bits/stdc++.h>
 
 #define NUM_STATION 4
 #define NUM_LINE 2
@@ -35,7 +34,7 @@ int main()
                             {0, 9, 2, 8}};  
     int e[] = {10, 12}, x[] = {18, 7};  
   
-    cout << als(a, t, e, x);  
+    cout << "The minimum time is " << als(a, t, e, x) << " minutes\n";
   
     return 0;  
 }
