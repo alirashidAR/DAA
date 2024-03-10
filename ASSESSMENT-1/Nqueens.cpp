@@ -1,96 +1,59 @@
 #include <iostream>
-#define N 4
+#include <vector>
+#include <cmath>
 using namespace std;
 
+bool Place(int k, int col, const vector<int>& chessboard);
+bool NQueens(int k, int n, vector<int>& chessboard);
+void PrintChessboard(const vector<int>& chessboard);
 
-void printSolution(int board[N][N])
-{
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++)
-		if(board[i][j])
-			cout << "Q ";
-		else cout<<". ";
-		printf("\n");
-	}
+bool NQueens(int k, int n, vector<int>& chessboard) {
+    if (k == n + 1) {
+        return true;
+    }
+    for (int col = 1; col <= n; col++) {
+        if (Place(k, col, chessboard)) {
+            chessboard[k - 1] = col;
+            if (NQueens(k + 1, n, chessboard)) {
+                return true;
+            }
+            chessboard[k - 1] = 0;
+        }
+    }
+    return false;
 }
 
-
-bool isSafe(int board[N][N], int row, int col)
-{
-	int i, j;
-
-	
-	for (i = 0; i < col; i++)
-		if (board[row][i])
-			return false;
-
-	
-	for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
-		if (board[i][j])
-			return false;
-
-	
-	for (i = row, j = col; j >= 0 && i < N; i++, j--)
-		if (board[i][j])
-			return false;
-
-	return true;
+bool Place(int k, int col, const vector<int>& chessboard) {
+    for (int i = 1; i < k; i++) {
+        if (chessboard[i - 1] == col || abs(chessboard[i - 1] - col) == abs(i - k)) {
+            return false;
+        }
+    }
+    return true;
 }
 
-
-bool solveNQUtil(int board[N][N], int col)
-{
-	
-	if (col >= N)
-		return true;
-
-	// Consider this column and try placing
-	// this queen in all rows one by one
-	for (int i = 0; i < N; i++) {
-		
-		// Check if the queen can be placed on
-		// board[i][col]
-		if (isSafe(board, i, col)) {
-			
-			// Place this queen in board[i][col]
-			board[i][col] = 1;
-
-			// recur to place rest of the queens
-			if (solveNQUtil(board, col + 1))
-				return true;
-
-			// If placing queen in board[i][col]
-			// doesn't lead to a solution, then
-			// remove queen from board[i][col]
-			board[i][col] = 0; // BACKTRACK
-		}
-	}
-
-	// If the queen cannot be placed in any row in
-	// this column col then return false
-	return false;
+void PrintChessboard(const vector<int>& chessboard) {
+    int n = chessboard.size();
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (chessboard[i] == j + 1) {
+                cout << "Q ";
+            } else {
+                cout << ". ";
+            }
+        }
+        cout << endl;
+    }
 }
 
-bool solveNQ()
-{
-	int board[N][N] = { { 0, 0, 0, 0 },
-						{ 0, 0, 0, 0 },
-						{ 0, 0, 0, 0 },
-						{ 0, 0, 0, 0 } };
-
-	if (solveNQUtil(board, 0) == false) {
-		cout << "Solution does not exist";
-		return false;
-	}
-
-	printSolution(board);
-	return true;
+int main() {
+    int n = 4;
+    vector<int> chessboard(n, 0);
+    if (NQueens(1, n, chessboard)) {
+        cout << "Solution:" << endl;
+        PrintChessboard(chessboard);
+    } else {
+        cout << "No solution found" << endl;
+    }
+    return 0;
 }
-
-
-int main()
-{
-	solveNQ();
-	return 0;
-}
-
