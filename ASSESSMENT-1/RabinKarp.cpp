@@ -1,5 +1,6 @@
 /* Following program is a C++ implementation of Rabin Karp
 Algorithm given in the CLRS book */
+#include<iostream>
 using namespace std;
 
 // d is the number of characters in the input alphabet
