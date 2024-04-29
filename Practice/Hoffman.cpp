@@ -6,7 +6,7 @@ using namespace std;
 struct node{
     char letter;
     int freq;
-    node *l eft;
+    node *left;
     node *right;
     node(char letter, int freq)
     {
