@@ -23,8 +23,12 @@ vector<int>prefix_function(string s)
 int main()
 {
     string t="abababca";
-    string n="ab";
+    string n="cccbabacc";
     vector<int> pi = prefix_function(n);
+    for(int i=0;i<n.length();i++)
+    {
+        cout<<pi[i]<<",";
+    }
     int i=0, j=0;
     int pos=-1;
     while(i<t.length())

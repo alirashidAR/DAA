@@ -1,5 +1,4 @@
 #include<iostream>
-#include<vector>
 #include<queue>
 using namespace std;
 
@@ -9,19 +8,19 @@ struct node
     int frequency;
     node *left;
     node *right;
-    node(char letter,int frequency)
-    {
+    node(char letter, int frequency){
         this->letter=letter;
         this->frequency=frequency;
-        left=NULL;
+        left= NULL;
         right=NULL;
     }
 };
 
-struct compare{
-    bool operator()(node *l, node* right)
+struct compare
+{
+    bool operator()(node* l, node *r)
     {
-        return (l->frequency > right->frequency);
+        return (l->frequency>r->frequency);
     }
 };
 
@@ -32,30 +31,30 @@ void printCodes(node *root, string str)
     {
         if(root->letter!='*')
         {
-            cout<<root->letter<<": "<<str<<endl;
+            cout<<root->letter<<":"<<str<<endl;
         }
         printCodes(root->left,str+"0");
         printCodes(root->right,str+"1");
     }
-
 }
 
-void hoffman(char data[],int freq[],int n)
+
+void hoffmann(char data[], int frequency[], int n)
 {
-    struct node *lchild, *rchild;
-    // creating a priority queue to push the nodes and create the priority queue;
-    priority_queue<node*, vector<node*>,compare> pq;
+    struct node * lchild, *rchild;
+    priority_queue<node*, vector<node*>, compare> pq;
     for(int i=0;i<n;i++)
     {
-        pq.push(new node(data[i],freq[i]));
+        pq.push(new node(data[i],frequency[i]));
     }
+
     while(pq.size()>1)
     {
         lchild=pq.top();
         pq.pop();
         rchild=pq.top();
         pq.pop();
-        struct node *temp;
+        struct node * temp;
         temp = new node('*',lchild->frequency+rchild->frequency);
         temp->left=lchild;
         temp->right=rchild;
@@ -66,7 +65,7 @@ void hoffman(char data[],int freq[],int n)
 
 int main()
 {
-    char A[] =  {'A','B','D','E','F'};
-    int freq[] = {3,4,5,6,4};
-    hoffman(A,freq,5);
+    char data [] = {'A','C','F','D','E'};
+    int freq [] = {41,5,6,12,1};
+    hoffmann(data,freq,5);
 }

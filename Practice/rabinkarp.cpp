@@ -48,8 +48,8 @@ void search(char pat[], char txt[], int q)
 }
 
 int main() {
-    char txt[] = "FOR GEEKS GEEKGEEK";
-    char pat[] = "GEEK";
+    char txt[] = "SAQSPAPGPGGAS";
+    char pat[] = "PGGA";
 
     // We choose a prime number for q
     int q = 101;

@@ -15,29 +15,29 @@ int maximum(int a, int b, int c)
 
 int LCR(int arr[], int l, int m, int h)
 {
-    int sum=0;
-    int left_sum= INT_MIN;
+    int prod=1;
+    int left_prod= INT_MIN;
     for(int i=m;i>=l;i--)
     {
-        sum+=arr[i];
-        if(sum>left_sum)
+        prod*=arr[i];
+        if(prod>left_prod)
         {
-            left_sum=sum;
+            left_prod=prod;
         }
     }
 
-    sum=0;
-    int right_sum= INT_MIN;
+    prod=1;
+    int right_prod= INT_MIN;
     for(int i=m;i<=h;i++)
     {
-        sum+=arr[i];
-        if(sum>right_sum)
+        prod*=arr[i];
+        if(prod>right_prod)
         {
-            right_sum=sum;
+            right_prod=prod;
         }
     }
 
-    return maximum(left_sum+right_sum-arr[m],left_sum,right_sum);
+    return maximum((left_prod*right_prod)/arr[m],left_prod,right_prod);
 }
 
 
@@ -45,7 +45,7 @@ int maximumSubArray(int arr[], int l, int h)
 {
     if(l>h)
     {
-        return 0;
+        return 1;
     }
     if(l==h)
     {
@@ -59,7 +59,7 @@ int maximumSubArray(int arr[], int l, int h)
 
 int main()
 {
-    int arr[]={-2,-3,4,-1,-2,1,5,-3};
+    int arr[]={6,-4,-5,8,0,7};
     int n=sizeof(arr)/sizeof(arr[0]);
     int max_sum=maximumSubArray(arr,0,n-1);
     cout<<max_sum;
